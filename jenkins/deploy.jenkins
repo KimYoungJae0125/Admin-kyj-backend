@@ -1,0 +1,92 @@
+pipeline {
+    agent any
+    environment {
+        GIT_COMMIT_AUTHOR = sh(script: "git --no-pager show -s --format=%an ${env.GIT_COMMIT}", returnStdout: true, label: "Git commit author").trim();
+        GIT_COMMIT_AUTHOR_EMAIL = sh(script: "git --no-pager show -s --format=%ae ${env.GIT_COMMIT}", returnStdout: true, label: "Git commit author email").trim();
+        GIT_COMMIT_MESSAGE = sh(script: "git --no-pager show -s --format=%B ${env.GIT_COMMIT}", returnStdout: true, label: "Git commit message").trim();
+    }
+    stages {
+        stage('1. Deployment Info check') {
+            steps {
+                echo "> 1. Deployment Info check Stage"
+                echo "> Branch : ${env.GIT_BRANCH}"
+                echo "> Git url : ${env.GIT_URL}"
+            }
+            post {
+                always {
+                    script {
+                        echo "Current stage : ${currentBuild.result}"
+                        echo "Current time : ${getCurrentTime()}"
+                    }
+                }
+            }
+        }
+        stage('2. Source update') {
+            steps {
+                echo "> 2. Source update"
+
+                git(
+                        url: GIT_URL
+                      , credentialsId: GIT_CREDENTIALS
+                      , branch : 'main'
+                )
+            }
+            post {
+                always {
+                    script {
+                        echo "Current stage : ${currentBuild.result}"
+                        echo "Current time : ${getCurrentTime()}"
+                    }
+                }
+            }
+        }
+        stage('3. Build') {
+            steps {
+                echo "> 3. Build Stage"
+                script {
+                    sh "./gradlew clean build --stacktrace"
+                }
+
+            }
+            post {
+                always {
+                    script {
+                        echo "Current stage : ${currentBuild.result}"
+                        echo "Current time : ${getCurrentTime()}"
+                    }
+                }
+            }
+        }
+        stage('4. Deploy') {
+            steps {
+                echo "> 4. Deploy Stage"
+                script {
+                    SCRIPT_PATH = "scripts/deploy.sh"
+
+                    sh "sudo mv build/libs/${JAR_FILE_NAME} ${DEPLOY_PATH}"
+                    sh "sudo mv ${SCRIPT_PATH} ${DEPLOY_PATH}/${SCRIPT_PATH}"
+                    sh "sudo chmod 755 ${DEPLOY_PATH}/${SCRIPT_PATH}"
+                    sh "sh ${DEPLOY_PATH}/${SCRIPT_PATH}"
+                }
+            }
+            post {
+                always {
+                    script {
+                        echo "Current stage : ${currentBuild.result}"
+                        echo "Current time : ${getCurrentTime()}"
+                    }
+                }
+            }
+        }
+    }
+}
+
+def pullScript(String branch) {
+    println("branchTest")
+    println(branch)
+    "git pull " + branch.replaceFirst("/", " ")
+}
+
+def getCurrentTime() {
+    new Date().format("YYYY년 MM월 dd일(EE) HH시 mm분 ss초", TimeZone.getTimeZone("Asia/Seoul"))
+}
