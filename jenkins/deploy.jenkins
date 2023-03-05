@@ -63,10 +63,14 @@ pipeline {
                 script {
                     SCRIPT_PATH = "scripts/deploy.sh"
 
-                    sh "sudo mv build/libs/${JAR_FILE_NAME} ${DEPLOY_PATH}"
-                    sh "sudo mv ${SCRIPT_PATH} ${DEPLOY_PATH}/${SCRIPT_PATH}"
-                    sh "sudo chmod 755 ${DEPLOY_PATH}/${SCRIPT_PATH}"
-                    sh "sh ${DEPLOY_PATH}/${SCRIPT_PATH}"
+                    sh (script: """
+                            sudo mv build/libs/${JAR_FILE_NAME} ${DEPLOY_PATH}
+                            sudo mv ${SCRIPT_PATH} ${DEPLOY_PATH}/${SCRIPT_PATH}
+                            cd ${DEPLOY_PATH}
+                            sudo chmod 755 ${SCRIPT_PATH}
+                            sh ${SCRIPT_PATH} 
+                        """,
+                        returnStatus: true)
                 }
             }
             post {
