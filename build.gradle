@@ -17,6 +17,15 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    /* lombok */
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    /* H2 : InMemory DB */
+    runtimeOnly 'com.h2database:h2:2.1.212'
+
 }
 
 tasks.named('test') {
