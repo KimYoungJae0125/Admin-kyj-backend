@@ -41,7 +41,7 @@ public class IntroducesService {
             introducesEntity.switchLayoutOrder(switchLayoutOrder);
         }
 
-        return introducesMapper.toResponse(introducesRepository.save(introducesEntity));
+        return introducesMapper.toResponse(introducesEntity);
     }
 
 }

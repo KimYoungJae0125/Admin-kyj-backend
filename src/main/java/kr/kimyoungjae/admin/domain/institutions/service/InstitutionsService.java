@@ -38,7 +38,7 @@ public class InstitutionsService {
             institutionsEntity.changeName(newName);
         }
 
-        return institutionsMapper.toResponse(institutionsRepository.save(institutionsEntity));
+        return institutionsMapper.toResponse(institutionsEntity);
     }
 
 }

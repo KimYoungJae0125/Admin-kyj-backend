@@ -49,7 +49,7 @@ public class MyInformationsService {
             myInformationsEntity.changeType(newType);
         }
 
-        return myInformationsMapper.toResponse(myInformationsRepository.save(myInformationsEntity));
+        return myInformationsMapper.toResponse(myInformationsEntity);
     }
 
 }
