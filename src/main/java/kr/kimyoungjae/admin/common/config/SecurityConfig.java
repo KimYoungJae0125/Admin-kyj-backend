@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize ->
                     authorize.requestMatchers(HttpMethod.POST).hasRole("ADMIN")
                             .requestMatchers(HttpMethod.PATCH).hasRole("ADMIN")
-                            .requestMatchers("/h2-console/**", "/v1/auths/**").permitAll()
+                            .requestMatchers("/h2-console/**", "/v1/auths/**", "/health").permitAll()
                             .anyRequest().authenticated()
                 )
                 .exceptionHandling(handler ->
