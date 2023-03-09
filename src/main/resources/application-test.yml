@@ -21,3 +21,6 @@ logging:
       hibernate:
         SQL: debug
         type: trace
+
+jwt:
+  secret-key: test-secret-key-test-secret-key-test-secret-key-test-secret-key-test-secret-key

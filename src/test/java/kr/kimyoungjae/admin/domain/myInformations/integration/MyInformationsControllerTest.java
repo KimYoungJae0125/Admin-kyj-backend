@@ -1,30 +1,23 @@
 package kr.kimyoungjae.admin.domain.myInformations.integration;
 
+import kr.kimyoungjae.admin.common.TestConfig;
 import kr.kimyoungjae.admin.domain.myInformations.model.dto.request.MyInformationsRequestDTO;
 import kr.kimyoungjae.admin.domain.myInformations.service.MyInformationsService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import static kr.kimyoungjae.admin.common.utils.JsonUtils.objectToJson;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DisplayName("내 정보 API 테스트")
-public class MyInformationsControllerTest {
+public class MyInformationsControllerTest extends TestConfig {
 
     @Autowired
     private MockMvc mockMvc;
@@ -46,7 +39,7 @@ public class MyInformationsControllerTest {
 
     @Test
     void getTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get(END_POINT))
+        mockMvc.perform(get(END_POINT))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpectAll(
@@ -75,9 +68,7 @@ public class MyInformationsControllerTest {
     @Test
     @Transactional
     void postTest() throws  Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectToJson(new MyInformationsRequestDTO("test", "테스트", 0, "test"))))
+        mockMvc.perform(post(END_POINT, new MyInformationsRequestDTO("test", "테스트", 0, "test")))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpectAll(
@@ -91,9 +82,7 @@ public class MyInformationsControllerTest {
     @Test
     @Transactional
     void patchTest() throws  Exception {
-        mockMvc.perform(MockMvcRequestBuilders.patch(END_POINT + "/{myInformationId}", 1)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectToJson(new MyInformationsRequestDTO("test", "테스트", 0, "test"))))
+        mockMvc.perform(patch(END_POINT + "/{myInformationId}", new MyInformationsRequestDTO("test", "테스트", 0, "test"), 1))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpectAll(
@@ -104,8 +93,5 @@ public class MyInformationsControllerTest {
 
                 );
     }
-
-
-
 
 }
