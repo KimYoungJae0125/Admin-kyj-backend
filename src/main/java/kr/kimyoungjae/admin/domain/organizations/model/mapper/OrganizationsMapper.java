@@ -8,10 +8,14 @@ import kr.kimyoungjae.admin.domain.institutions.repository.InstitutionsRepositor
 import kr.kimyoungjae.admin.domain.organizations.model.dto.request.OrganizationsRequestDTO;
 import kr.kimyoungjae.admin.domain.organizations.model.dto.response.OrganizationsResponseDTO;
 import kr.kimyoungjae.admin.domain.organizations.model.entity.OrganizationsEntity;
+import kr.kimyoungjae.admin.domain.projects.model.dto.response.ProjectsResponseDTO;
+import kr.kimyoungjae.admin.domain.projects.model.entity.ProjectsEntity;
+import kr.kimyoungjae.admin.domain.projects.model.mapper.ProjectsMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -19,6 +23,8 @@ public class OrganizationsMapper implements CommonMapper<OrganizationsEntity, Or
 
     private final InstitutionsRepository institutionsRepository;
     private final InstitutionsMapper institutionsMapper;
+
+    private final ProjectsMapper projectsMapper;
 
     @Override
     public OrganizationsResponseDTO toResponse(OrganizationsEntity organizationsEntity) {
@@ -29,8 +35,9 @@ public class OrganizationsMapper implements CommonMapper<OrganizationsEntity, Or
         LocalDate endDate =  organizationsEntity.getEndDate();
         Integer layoutOrder = organizationsEntity.getLayoutOrder();
         InstitutionsResponseDTO institution = institutionsMapper.toResponse(organizationsEntity.getInstitution());
+        List<ProjectsResponseDTO> projects = projectsMapper.toResponses(organizationsEntity.getProjects());
 
-        return new OrganizationsResponseDTO(id, name, description, startDate, endDate, layoutOrder, institution);
+        return new OrganizationsResponseDTO(id, name, description, startDate, endDate, layoutOrder, institution, projects);
     }
 
     @Override

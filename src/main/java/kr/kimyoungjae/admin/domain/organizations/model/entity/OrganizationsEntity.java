@@ -3,6 +3,7 @@ package kr.kimyoungjae.admin.domain.organizations.model.entity;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import kr.kimyoungjae.admin.domain.institutions.model.entity.InstitutionsEntity;
+import kr.kimyoungjae.admin.domain.projects.model.entity.ProjectsEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,6 +11,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -35,6 +38,9 @@ public class OrganizationsEntity {
     @ManyToOne
     @JoinColumn(name = "institution_id")
     private InstitutionsEntity institution;
+
+    @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
+    private List<ProjectsEntity> projects = new ArrayList<>();
 
     @Builder
     public OrganizationsEntity(String name, String description, LocalDate startDate, LocalDate endDate, Integer layoutOrder, InstitutionsEntity institution) {

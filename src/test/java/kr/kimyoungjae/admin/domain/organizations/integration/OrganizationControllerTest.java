@@ -1,5 +1,6 @@
 package kr.kimyoungjae.admin.domain.organizations.integration;
 
+import kr.kimyoungjae.admin.common.TestConfig;
 import kr.kimyoungjae.admin.domain.institutions.model.entity.InstitutionsEntity;
 import kr.kimyoungjae.admin.domain.institutions.repository.InstitutionsRepository;
 import kr.kimyoungjae.admin.domain.organizations.model.dto.request.OrganizationsRequestDTO;
@@ -8,10 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,11 +21,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class OrganizationControllerTest {
+public class OrganizationControllerTest extends TestConfig {
 
     @Autowired
     private MockMvc mockMvc;
@@ -59,7 +54,7 @@ public class OrganizationControllerTest {
 
     @Test
     void getTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get(END_POINT))
+        mockMvc.perform(get(END_POINT))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpectAll(
@@ -89,7 +84,7 @@ public class OrganizationControllerTest {
 
     @Test
     void getByInstitutionIdTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get(END_POINT + "/institutions/{institutionId}", institutionIds[0]))
+        mockMvc.perform(get(END_POINT + "/institutions/{institutionId}", institutionIds[0]))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpectAll(
@@ -116,9 +111,7 @@ public class OrganizationControllerTest {
     @Transactional
     void postTest() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectToJson(new OrganizationsRequestDTO("테스트1", "테스트설명1", LocalDate.now(), null, 1, institutionIds[0]))))
+        mockMvc.perform(post(END_POINT, new OrganizationsRequestDTO("테스트1", "테스트설명1", LocalDate.now(), null, 1, institutionIds[0])))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpectAll(
@@ -132,9 +125,7 @@ public class OrganizationControllerTest {
     @Transactional
     void patchTest() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.patch(END_POINT + "/{organizationId}", 1)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectToJson(new OrganizationsRequestDTO("수정 된 이름", "수정 된 설명1", LocalDate.now(), null, null, null))))
+        mockMvc.perform(patch(END_POINT + "/{organizationId}", new OrganizationsRequestDTO("수정 된 이름", "수정 된 설명1", LocalDate.now(), null, null, null), 1))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpectAll(
