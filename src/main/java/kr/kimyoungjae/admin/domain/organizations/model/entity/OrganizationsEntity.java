@@ -40,6 +40,7 @@ public class OrganizationsEntity {
     private InstitutionsEntity institution;
 
     @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
+    @OrderBy(value = "layoutOrder")
     private List<ProjectsEntity> projects = new ArrayList<>();
 
     @Builder
