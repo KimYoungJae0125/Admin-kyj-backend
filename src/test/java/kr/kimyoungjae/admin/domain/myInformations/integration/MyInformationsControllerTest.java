@@ -25,7 +25,7 @@ public class MyInformationsControllerTest extends TestConfig {
     @Autowired
     private MyInformationsService myInformationsService;
 
-    private final String END_POINT = "/v1/myInformations";
+    private final String END_POINT = "/v1/my-informations";
 
     @BeforeAll
     @Transactional

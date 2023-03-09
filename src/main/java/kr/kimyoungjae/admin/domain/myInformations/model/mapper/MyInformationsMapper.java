@@ -14,7 +14,7 @@ public class MyInformationsMapper implements CommonMapper<MyInformationsEntity, 
         String name = myInformationsEntity.getName();
         String description = myInformationsEntity.getDescription();
         Integer layoutOrder = myInformationsEntity.getLayoutOrder();
-        String typeName = myInformationsEntity.getTypename();
+        String typeName = myInformationsEntity.getTypeName();
 
         return new MyInformationsResponseDTO(id, name, description, layoutOrder, typeName);
     }
@@ -24,7 +24,7 @@ public class MyInformationsMapper implements CommonMapper<MyInformationsEntity, 
                 .name(myInformationsRequestDTO.name())
                 .description(myInformationsRequestDTO.description())
                 .layoutOrder(myInformationsRequestDTO.layoutOrder())
-                .typename(myInformationsRequestDTO.typeName())
+                .typeName(myInformationsRequestDTO.typeName())
                 .build();
     }
 }

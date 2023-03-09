@@ -25,14 +25,14 @@ public class MyInformationsEntity {
     private Integer layoutOrder;
 
     @Column(length = 10)
-    private String typename;
+    private String typeName;
 
     @Builder
-    public MyInformationsEntity(String name, String description, int layoutOrder, String typename) {
+    public MyInformationsEntity(String name, String description, int layoutOrder, String typeName) {
         this.name = name;
         this.description = description;
         this.layoutOrder = layoutOrder;
-        this.typename = typename;
+        this.typeName = typeName;
     }
 
     public void changeName(String name) {
@@ -47,8 +47,8 @@ public class MyInformationsEntity {
         this.layoutOrder = layoutOrder;
     }
 
-    public void changeType(String typename) {
-        this.typename = typename;
+    public void changeType(String typeName) {
+        this.typeName = typeName;
     }
 
 }
