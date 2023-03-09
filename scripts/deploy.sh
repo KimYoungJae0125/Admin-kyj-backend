@@ -49,7 +49,7 @@ print_current_port_info
 echo "> 구동 될 Port : $START_PORT"
 
 echo "> 실행 될 Jar 파일 : $JAR_FILE_NAME"
-JENKINS_NODE_COOKIE=dontKillMe && nohup java -jar $JAR_FILE_NAME --spring.profiles.active=$ACTIVE_PROFILE --server.port=$START_PORT --spring.datasource.url=$DB_URL --spring.datasource.username=$DB_USERNAME --spring.datasource.password=$DB_PASSWORD --jwt.secret-key=$JWT_SECREY_KEY &
+JENKINS_NODE_COOKIE=dontKillMe && nohup java -jar $JAR_FILE_NAME --spring.profiles.active=$ACTIVE_PROFILE --server.port=$START_PORT --spring.datasource.url=$DB_URL --spring.datasource.username=$DB_USERNAME --spring.datasource.password=$DB_PASSWORD --jwt.secret-key=$JWT_SECREY_KEY 1> $DEPLOY_PATH/output.log 2>&1 &
 
 
 
