@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 @RestController
 @RequestMapping("/v1/auths")
@@ -20,7 +21,7 @@ public class TokenController {
     public TokenDto getToken(HttpServletResponse response) {
         TokenDto newToken = tokenService.getToken();
 
-        Cookie cookie = new Cookie("accesstoken", newToken.type() + " " + newToken.token());
+        Cookie cookie = new Cookie("accesstoken", newToken.token());
         cookie.setSecure(true);
         cookie.setHttpOnly(true);
         response.addCookie(cookie);
