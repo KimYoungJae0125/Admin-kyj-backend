@@ -5,10 +5,7 @@ import kr.kimyoungjae.admin.domain.organizations.model.entity.OrganizationsEntit
 import kr.kimyoungjae.admin.domain.projectDescriptions.model.entity.ProjectDescriptionsEntity;
 import kr.kimyoungjae.admin.domain.skills.model.entity.SkillsEntity;
 import kr.kimyoungjae.admin.domain.teams.model.entity.TeamsEntity;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.core.annotation.Order;
 
 import java.time.LocalDate;
@@ -24,7 +21,7 @@ public class ProjectsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 50)
+    @Column(columnDefinition = "varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL")
     private String name;
     private Integer layoutOrder;
     private LocalDate startDate;

@@ -24,10 +24,10 @@ public class OrganizationsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 20)
+    @Column(columnDefinition = "varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL")
     private String name;
 
-    @Column(length = 4000)
+    @Column(columnDefinition = "varchar(4000) COLLATE utf8mb4_unicode_ci NOT NULL")
     private String description;
 
     @Column(updatable = false)

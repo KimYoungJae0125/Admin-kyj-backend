@@ -16,10 +16,10 @@ public class MyInformationsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 20)
+    @Column(columnDefinition = "varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL")
     private String name;
 
-    @Column(length = 100)
+    @Column(columnDefinition = "varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL")
     private String description;
 
     private Integer layoutOrder;

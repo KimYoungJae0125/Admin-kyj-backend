@@ -13,6 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.testcontainers.containers.MySQLContainer;
 
 import java.util.Arrays;
 
@@ -21,7 +22,7 @@ import static kr.kimyoungjae.admin.common.utils.JsonUtils.objectToJson;
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class TestConfig {
+public class TestConfig extends ContainerConfig {
 
     @Autowired
     protected MockMvc mockMvc;

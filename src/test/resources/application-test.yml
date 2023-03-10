@@ -1,18 +1,18 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
+    url: jdbc:tc:mysql:5.7.34:///test
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
     username: sa
-  h2:
-    console:
-      path: /h2-console
-      enabled: true
   jpa:
     properties:
       hibernate:
         format_sql: true
         use_sql_comments: true
         show_sql: true
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.MySQLDialect
+    database: mysql
 
 
 logging:

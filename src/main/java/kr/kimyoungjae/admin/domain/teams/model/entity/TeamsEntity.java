@@ -15,7 +15,7 @@ public class TeamsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 20)
+    @Column(columnDefinition = "varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL")
     private String name;
 
     @Builder
