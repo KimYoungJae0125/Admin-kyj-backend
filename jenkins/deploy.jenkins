@@ -44,7 +44,7 @@ pipeline {
             steps {
                 echo "> 3. Build Stage"
                 script {
-                    sh "./gradlew clean build --stacktrace"
+                    sh "sudo ./gradlew clean build --stacktrace"
                 }
 
             }
