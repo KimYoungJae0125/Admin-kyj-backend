@@ -2,13 +2,12 @@ version: "3.7"
 
 services:
   test-mysql:
-    image:  mysql/mysql-server:5.7
-    platform: linux/x86_64
+    image: hypriot/rpi-mysql
+    platform: linux/amd64
     environment:
       MYSQL_ROOT_HOST: '%'
       MYSQL_DATABASE: 'test'
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
       TZ: Asia/Seoul
-      DEFAULT-CHARACTER-SET: utf8mb4
     ports:
       - "3306"
