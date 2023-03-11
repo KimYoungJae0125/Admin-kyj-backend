@@ -4,7 +4,6 @@ import jakarta.servlet.http.Cookie;
 import kr.kimyoungjae.admin.common.enums.Roles;
 import kr.kimyoungjae.admin.common.utils.JwtTokenProvider;
 import kr.kimyoungjae.admin.domain.auth.model.TokenDto;
-import kr.kimyoungjae.admin.domain.introduces.model.dto.request.IntroducesRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.testcontainers.containers.MySQLContainer;
 
 import java.util.Arrays;
 
@@ -22,7 +20,7 @@ import static kr.kimyoungjae.admin.common.utils.JsonUtils.objectToJson;
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class TestConfig extends ContainerConfig {
+public class TestConfig {
 
     @Autowired
     protected MockMvc mockMvc;
