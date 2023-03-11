@@ -16,7 +16,6 @@ public class IntroducesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL")
     private String content;
 
     private Integer layoutOrder;

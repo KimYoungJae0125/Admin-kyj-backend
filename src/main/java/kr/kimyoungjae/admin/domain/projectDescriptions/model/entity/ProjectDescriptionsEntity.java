@@ -17,7 +17,6 @@ public class ProjectDescriptionsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "varchar(4000) COLLATE utf8mb4_unicode_ci NOT NULL")
     private String content;
 
     private Integer layoutOrder;

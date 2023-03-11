@@ -25,24 +25,20 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5',  'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
-    /* testContainer */
-    testImplementation "org.testcontainers:testcontainers:1.17.6"
-    testImplementation "org.testcontainers:mysql"
-
     /* lombok */
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    /* H2 : InMemory DB */
+    runtimeOnly 'com.h2database:h2:2.1.212'
+    testRuntimeOnly 'com.h2database:h2:2.1.212'
 
     /* mysql Connector */
     implementation 'com.mysql:mysql-connector-j:8.0.31'
 }
 
-dependencyManagement {
-    imports {
-        mavenBom("org.testcontainers:testcontainers-bom:1.17.6")
-    }
-}
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+

@@ -21,7 +21,6 @@ public class ProjectsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(columnDefinition = "varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL")
     private String name;
     private Integer layoutOrder;
     private LocalDate startDate;

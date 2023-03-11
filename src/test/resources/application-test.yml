@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:tc:mysql:5.7:///test
-    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:h2:mem:testdb;MODE=MYSQL
+    driver-class-name: org.h2.Driver
     username: sa
   jpa:
     properties:
@@ -11,9 +11,6 @@ spring:
         show_sql: true
     hibernate:
       ddl-auto: create-drop
-    database-platform: org.hibernate.dialect.MySQLDialect
-    database: mysql
-
 
 logging:
   level:
