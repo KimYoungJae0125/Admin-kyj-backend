@@ -26,7 +26,7 @@ public class TokenController {
         cookie.setHttpOnly(true);
         response.addCookie(cookie);
 
-        return tokenService.getToken();
+        return newToken;
     }
 
 }
