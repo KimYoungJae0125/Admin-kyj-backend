@@ -34,4 +34,21 @@ public class OrganizationQueryDslRepository implements QueryDSLRepository<Organi
                 )
                 .fetch();
     }
+    public List<OrganizationsEntity> findAllByInstitutionId(Long institutionId) {
+
+        return jpaQueryFactory
+                .selectFrom(organizationsEntity)
+                .leftJoin(organizationsEntity.institution, institutionsEntity).fetchJoin()
+                .leftJoin(organizationsEntity.projects, projectsEntity).fetchJoin()
+                .leftJoin(projectsEntity.team, teamsEntity).fetchJoin()
+                .orderBy(
+                        organizationsEntity.institution.id.asc()
+                      , organizationsEntity.layoutOrder.asc()
+                      , projectsEntity.layoutOrder.asc()
+                )
+                .where(
+                       organizationsEntity.institution.id.eq(institutionId)
+                )
+                .fetch();
+    }
 }
