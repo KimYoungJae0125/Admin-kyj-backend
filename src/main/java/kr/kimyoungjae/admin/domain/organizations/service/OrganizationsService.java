@@ -1,12 +1,13 @@
 package kr.kimyoungjae.admin.domain.organizations.service;
 
+import kr.kimyoungjae.admin.domain.institutions.model.entity.InstitutionsEntity;
 import kr.kimyoungjae.admin.domain.organizations.model.dto.request.OrganizationsRequestDTO;
 import kr.kimyoungjae.admin.domain.organizations.model.dto.response.OrganizationsResponseDTO;
 import kr.kimyoungjae.admin.domain.organizations.model.entity.OrganizationsEntity;
 import kr.kimyoungjae.admin.domain.organizations.model.mapper.OrganizationsMapper;
+import kr.kimyoungjae.admin.domain.organizations.repository.OrganizationQueryDslRepository;
 import kr.kimyoungjae.admin.domain.organizations.repository.OrganizationsRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,10 +20,11 @@ import static kr.kimyoungjae.admin.common.conditions.CustomSort.layoutSort;
 public class OrganizationsService {
 
     private final OrganizationsRepository organizationsRepository;
+    private final OrganizationQueryDslRepository organizationQueryDslRepository;
     private final OrganizationsMapper organizationsMapper;
 
     public List<OrganizationsResponseDTO> getOrganizationInfoList() {
-        return organizationsMapper.toResponses(organizationsRepository.findAll(layoutSort("institutionId")));
+        return organizationsMapper.toResponses(organizationQueryDslRepository.findAll());
     }
 
     public OrganizationsResponseDTO saveOrganizationInfo(OrganizationsRequestDTO organizationsRequestDTO) {
@@ -53,7 +55,7 @@ public class OrganizationsService {
 
         Long changeInstitutionId = organizationsRequestDTO.institutionId();
         if(changeInstitutionId != null) {
-            organizationsEntity.changeInstitution(organizationsMapper.getInstitution(changeInstitutionId));
+            organizationsEntity.changeInstitution(new InstitutionsEntity(changeInstitutionId));
         }
 
 

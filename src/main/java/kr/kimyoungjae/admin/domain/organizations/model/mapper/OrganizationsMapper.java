@@ -4,12 +4,10 @@ import kr.kimyoungjae.admin.common.mapper.CommonMapper;
 import kr.kimyoungjae.admin.domain.institutions.model.dto.response.InstitutionsResponseDTO;
 import kr.kimyoungjae.admin.domain.institutions.model.entity.InstitutionsEntity;
 import kr.kimyoungjae.admin.domain.institutions.model.mapper.InstitutionsMapper;
-import kr.kimyoungjae.admin.domain.institutions.repository.InstitutionsRepository;
 import kr.kimyoungjae.admin.domain.organizations.model.dto.request.OrganizationsRequestDTO;
 import kr.kimyoungjae.admin.domain.organizations.model.dto.response.OrganizationsResponseDTO;
 import kr.kimyoungjae.admin.domain.organizations.model.entity.OrganizationsEntity;
 import kr.kimyoungjae.admin.domain.projects.model.dto.response.ProjectsResponseDTO;
-import kr.kimyoungjae.admin.domain.projects.model.entity.ProjectsEntity;
 import kr.kimyoungjae.admin.domain.projects.model.mapper.ProjectsMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,7 +19,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrganizationsMapper implements CommonMapper<OrganizationsEntity, OrganizationsRequestDTO, OrganizationsResponseDTO> {
 
-    private final InstitutionsRepository institutionsRepository;
     private final InstitutionsMapper institutionsMapper;
 
     private final ProjectsMapper projectsMapper;
@@ -48,12 +45,8 @@ public class OrganizationsMapper implements CommonMapper<OrganizationsEntity, Or
                 .startDate(organizationsRequestDTO.startDate())
                 .endDate(organizationsRequestDTO.endDate())
                 .layoutOrder(organizationsRequestDTO.layoutOrder())
-                .institution(institutionsRepository.getInstitution(organizationsRequestDTO.institutionId()))
+                .institution(new InstitutionsEntity(organizationsRequestDTO.institutionId()))
                 .build();
-    }
-
-    public InstitutionsEntity getInstitution(Long institutionId) {
-        return institutionsRepository.getInstitution(institutionId);
     }
 
 }

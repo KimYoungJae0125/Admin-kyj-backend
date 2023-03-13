@@ -4,15 +4,13 @@ import kr.kimyoungjae.admin.common.mapper.CommonMapper;
 import kr.kimyoungjae.admin.domain.projectDescriptions.model.dto.request.ProjectDescriptionsRequestDTO;
 import kr.kimyoungjae.admin.domain.projectDescriptions.model.dto.response.ProjectDescriptionsResponseDTO;
 import kr.kimyoungjae.admin.domain.projectDescriptions.model.entity.ProjectDescriptionsEntity;
-import kr.kimyoungjae.admin.domain.projects.repository.ProjectsRepository;
+import kr.kimyoungjae.admin.domain.projects.model.entity.ProjectsEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 public class ProjectDescriptionsMapper implements CommonMapper<ProjectDescriptionsEntity, ProjectDescriptionsRequestDTO, ProjectDescriptionsResponseDTO> {
-
-    private final ProjectsRepository projectsRepository;
 
     @Override
     public ProjectDescriptionsResponseDTO toResponse(ProjectDescriptionsEntity projectDescriptionsEntity) {
@@ -22,14 +20,13 @@ public class ProjectDescriptionsMapper implements CommonMapper<ProjectDescriptio
 
         return new ProjectDescriptionsResponseDTO(id, content, layoutOrder);
     }
-
     @Override
     public ProjectDescriptionsEntity toEntity(ProjectDescriptionsRequestDTO projectDescriptionsRequestDTO) {
 
         return ProjectDescriptionsEntity.builder()
                 .content(projectDescriptionsRequestDTO.content())
                 .layoutOrder(projectDescriptionsRequestDTO.layoutOrder())
-                .project(projectsRepository.getProject(projectDescriptionsRequestDTO.projectId()))
+                .project(new ProjectsEntity(projectDescriptionsRequestDTO.projectId()))
                 .build();
     }
 }

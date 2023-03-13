@@ -1,7 +1,7 @@
 package kr.kimyoungjae.admin.domain.projects.model.mapper;
 
 import kr.kimyoungjae.admin.common.mapper.CommonMapper;
-import kr.kimyoungjae.admin.domain.organizations.repository.OrganizationsRepository;
+import kr.kimyoungjae.admin.domain.organizations.model.entity.OrganizationsEntity;
 import kr.kimyoungjae.admin.domain.projectDescriptions.model.dto.response.ProjectDescriptionsResponseDTO;
 import kr.kimyoungjae.admin.domain.projectDescriptions.model.mapper.ProjectDescriptionsMapper;
 import kr.kimyoungjae.admin.domain.projects.model.dto.request.ProjectsRequestDTO;
@@ -10,8 +10,8 @@ import kr.kimyoungjae.admin.domain.projects.model.entity.ProjectsEntity;
 import kr.kimyoungjae.admin.domain.skills.model.dto.response.SkillsResponseDTO;
 import kr.kimyoungjae.admin.domain.skills.model.mapper.SkillsMapper;
 import kr.kimyoungjae.admin.domain.teams.model.dto.response.TeamsResponseDTO;
+import kr.kimyoungjae.admin.domain.teams.model.entity.TeamsEntity;
 import kr.kimyoungjae.admin.domain.teams.model.mapper.TeamsMapper;
-import kr.kimyoungjae.admin.domain.teams.repository.TeamsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -23,8 +23,6 @@ import java.util.List;
 public class ProjectsMapper implements CommonMapper<ProjectsEntity, ProjectsRequestDTO, ProjectsResponseDTO> {
 
     private final TeamsMapper teamsMapper;
-    private final TeamsRepository teamsRepository;
-    private final OrganizationsRepository organizationsRepository;
     private final ProjectDescriptionsMapper projectDescriptionsMapper;
     private final SkillsMapper skillsMapper;
 
@@ -51,8 +49,8 @@ public class ProjectsMapper implements CommonMapper<ProjectsEntity, ProjectsRequ
                 .layoutOrder(projectsRequestDTO.layoutOrder())
                 .startDate(projectsRequestDTO.startDate())
                 .endDate(projectsRequestDTO.endDate())
-                .team(teamsRepository.getTeam(projectsRequestDTO.teamId()))
-                .organization(organizationsRepository.getOrganization(projectsRequestDTO.organizationId()))
+                .team(new TeamsEntity(projectsRequestDTO.teamId()))
+                .organization(new OrganizationsEntity(projectsRequestDTO.organizationId()))
                 .build();
     }
 }

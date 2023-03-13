@@ -37,9 +37,13 @@ public class OrganizationsEntity {
     @JoinColumn(name = "institution_id")
     private InstitutionsEntity institution;
 
-    @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "organization")
     @OrderBy(value = "layoutOrder")
     private List<ProjectsEntity> projects = new ArrayList<>();
+
+    public OrganizationsEntity(Long id) {
+        this.id = id;
+    }
 
     @Builder
     public OrganizationsEntity(String name, String description, LocalDate startDate, LocalDate endDate, Integer layoutOrder, InstitutionsEntity institution) {
@@ -69,6 +73,8 @@ public class OrganizationsEntity {
     public void changeInstitution(InstitutionsEntity institution) {
         this.institution = institution;
     }
+
+
 
 
 }

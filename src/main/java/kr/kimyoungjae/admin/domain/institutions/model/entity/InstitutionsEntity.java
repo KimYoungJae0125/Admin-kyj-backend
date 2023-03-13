@@ -18,6 +18,10 @@ public class InstitutionsEntity {
 
     private String name;
 
+    public InstitutionsEntity(Long id) {
+        this.id = id;
+    }
+
     @Builder
     public InstitutionsEntity(String name) {
         this.name = name;

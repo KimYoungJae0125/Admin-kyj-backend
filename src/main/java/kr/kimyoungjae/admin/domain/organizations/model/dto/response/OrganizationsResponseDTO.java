@@ -6,6 +6,7 @@ import kr.kimyoungjae.admin.domain.projects.model.dto.response.ProjectsResponseD
 import java.time.LocalDate;
 import java.util.List;
 
+
 public record OrganizationsResponseDTO(Long id, String name, String description, LocalDate startDate, LocalDate endDate, Integer layoutOrder, InstitutionsResponseDTO institution, List<ProjectsResponseDTO> projects) {
 
 }

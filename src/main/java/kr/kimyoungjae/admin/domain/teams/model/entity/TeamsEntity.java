@@ -17,6 +17,10 @@ public class TeamsEntity {
     private Long id;
     private String name;
 
+    public TeamsEntity(Long id) {
+        this.id = id;
+    }
+
     @Builder
     public TeamsEntity(String name) {
         this.name = name;

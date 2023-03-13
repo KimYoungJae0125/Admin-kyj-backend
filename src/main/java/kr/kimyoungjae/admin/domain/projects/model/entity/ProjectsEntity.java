@@ -34,13 +34,18 @@ public class ProjectsEntity {
     @JoinColumn(name = "organization_id")
     private OrganizationsEntity organization;
 
-    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "project")
     @OrderBy(value = "layoutOrder")
     private List<ProjectDescriptionsEntity> descriptions = new ArrayList<>();
 
     @OneToMany(mappedBy = "project")
     @OrderBy(value = "layoutOrder")
     private List<SkillsEntity> skills = new ArrayList<>();
+
+
+    public ProjectsEntity(Long id) {
+        this.id = id;
+    }
 
     @Builder
     public ProjectsEntity(String name, Integer layoutOrder, LocalDate startDate, LocalDate endDate, TeamsEntity team, OrganizationsEntity organization) {
