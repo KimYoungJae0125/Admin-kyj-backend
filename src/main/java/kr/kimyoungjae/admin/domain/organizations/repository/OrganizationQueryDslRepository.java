@@ -10,6 +10,7 @@ import java.util.List;
 
 import static kr.kimyoungjae.admin.domain.institutions.model.entity.QInstitutionsEntity.institutionsEntity;
 import static kr.kimyoungjae.admin.domain.organizations.model.entity.QOrganizationsEntity.organizationsEntity;
+import static kr.kimyoungjae.admin.domain.projectDescriptions.model.entity.QProjectDescriptionsEntity.projectDescriptionsEntity;
 import static kr.kimyoungjae.admin.domain.projects.model.entity.QProjectsEntity.projectsEntity;
 import static kr.kimyoungjae.admin.domain.teams.model.entity.QTeamsEntity.teamsEntity;
 
@@ -22,19 +23,9 @@ public class OrganizationQueryDslRepository implements QueryDSLRepository<Organi
     @Override
     public List<OrganizationsEntity> findAll() {
 
-        return jpaQueryFactory
-                .selectFrom(organizationsEntity)
-                .leftJoin(organizationsEntity.institution, institutionsEntity).fetchJoin()
-                .leftJoin(organizationsEntity.projects, projectsEntity).fetchJoin()
-                .leftJoin(projectsEntity.team, teamsEntity).fetchJoin()
-                .orderBy(
-                        organizationsEntity.institution.id.asc()
-                      , organizationsEntity.layoutOrder.asc()
-                      , projectsEntity.layoutOrder.asc()
-                )
-                .fetch();
+        return this.findAll(null);
     }
-    public List<OrganizationsEntity> findAllByInstitutionId(Long institutionId) {
+    public List<OrganizationsEntity> findAll(Long institutionId) {
 
         return jpaQueryFactory
                 .selectFrom(organizationsEntity)
@@ -47,7 +38,7 @@ public class OrganizationQueryDslRepository implements QueryDSLRepository<Organi
                       , projectsEntity.layoutOrder.asc()
                 )
                 .where(
-                       organizationsEntity.institution.id.eq(institutionId)
+                       institutionId == null ? null : organizationsEntity.institution.id.eq(institutionId)
                 )
                 .fetch();
     }

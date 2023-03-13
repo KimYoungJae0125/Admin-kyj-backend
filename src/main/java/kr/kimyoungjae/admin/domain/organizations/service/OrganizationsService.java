@@ -63,6 +63,6 @@ public class OrganizationsService {
     }
 
     public List<OrganizationsResponseDTO> getOrganizationInfoListByInstitutionId(Long institutionId) {
-        return organizationsMapper.toResponses(organizationQueryDslRepository.findAllByInstitutionId(institutionId));
+        return organizationsMapper.toResponses(organizationQueryDslRepository.findAll(institutionId));
     }
 }
