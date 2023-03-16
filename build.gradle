@@ -10,11 +10,9 @@ sourceCompatibility = '17'
 
 repositories {
     mavenCentral()
-    maven { url 'https://artifactory-oss.prod.netflix.net/artifactory/maven-oss-candidates' }
 }
 
 ext {
-    set('springCloudVersion', "2022.0.1")
     set('querydslDir', "$buildDir/generated/querydsl")
 }
 
@@ -27,10 +25,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-    /* spring-cloud-eureka-client */
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-
 
     /* QueryDSL */
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
@@ -53,13 +47,6 @@ dependencies {
 
     /* mysql Connector */
     implementation 'com.mysql:mysql-connector-j:8.0.31'
-}
-
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
 }
 
 sourceSets {

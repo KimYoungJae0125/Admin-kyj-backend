@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: backend-service
   datasource:
     url: jdbc:mysql://localhost:33006/local-db
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -31,10 +29,3 @@ logging:
 
 jwt:
   secret-key: local-secret-key-local-secret-key-local-secret-key-local-secret-key-local-secret-key
-
-eureka:
-  instance:
-    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
-  client:
-    service-url:
-      defaultZone: http://127.0.0.1:8761/eureka
