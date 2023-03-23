@@ -17,13 +17,16 @@ public class TeamsEntity {
     private Long id;
     private String name;
 
+    private String rank;
+
     public TeamsEntity(Long id) {
         this.id = id;
     }
 
     @Builder
-    public TeamsEntity(String name) {
+    public TeamsEntity(String name, String rank) {
         this.name = name;
+        this.rank = rank;
     }
 
 

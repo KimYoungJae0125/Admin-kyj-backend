@@ -20,8 +20,8 @@ public class SkillsService {
     private final SkillsRepository skillsRepository;
     private final SkillsMapper skillsMapper;
 
-    public List<SkillsResponseDTO> findAllByProjectId(Long projectId) {
-        return skillsMapper.toResponses(skillsRepository.findAllByProjectId(projectId, layoutSort()));
+    public List<SkillsResponseDTO> findAllByExperienceId(Long experienceId) {
+        return skillsMapper.toResponses(skillsRepository.findAllByExperienceId(experienceId, layoutSort()));
     }
 
     @Transactional

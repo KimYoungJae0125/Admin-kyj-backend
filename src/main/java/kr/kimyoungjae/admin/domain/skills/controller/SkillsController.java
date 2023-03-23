@@ -15,8 +15,8 @@ public class SkillsController {
     private final SkillsService skillsService;
 
     @GetMapping
-    public List<SkillsResponseDTO> findAllByProjectId(@PathVariable Long projectId) {
-        return skillsService.findAllByProjectId(projectId);
+    public List<SkillsResponseDTO> findAllByExperienceId(@PathVariable Long projectId) {
+        return skillsService.findAllByExperienceId(projectId);
     }
 
     @PostMapping

@@ -13,6 +13,6 @@ public interface SkillsRepository extends JpaRepository<SkillsEntity, Long> {
                 .orElseThrow(RuntimeException::new);
     }
 
-    List<SkillsEntity> findAllByProjectId(Long projectId, Sort sort);
+    List<SkillsEntity> findAllByExperienceId(Long experienceId, Sort sort);
 
 }

@@ -13,13 +13,15 @@ public class TeamsMapper implements CommonMapper<TeamsEntity, TeamsRequestDTO, T
     public TeamsResponseDTO toResponse(TeamsEntity teamsEntity) {
         Long id = teamsEntity.getId();
         String name = teamsEntity.getName();
-        return new TeamsResponseDTO(id, name);
+        String rank = teamsEntity.getRank();
+        return new TeamsResponseDTO(id, name, rank);
     }
 
     @Override
     public TeamsEntity toEntity(TeamsRequestDTO teamsRequestDTO) {
         return TeamsEntity.builder()
                 .name(teamsRequestDTO.name())
+                .rank(teamsRequestDTO.rank())
                 .build();
     }
 }

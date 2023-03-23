@@ -1,6 +1,7 @@
 package kr.kimyoungjae.admin.domain.certificates.model.entity;
 
 import jakarta.persistence.*;
+import kr.kimyoungjae.admin.domain.experiences.model.entity.ExperiencesEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "certifcates")
+@Table(name = "certificates")
 public class CertificatesEntity {
 
     @Id
@@ -19,27 +20,25 @@ public class CertificatesEntity {
     private Long id;
 
     private String name;
-    private String description;
-    private String issuingAuthority;
-    private LocalDate certificationDate;
+
+    private String institutionName;
+
+    private LocalDate startDate;
+
+    private LocalDate endDate;
+
 
     public CertificatesEntity(Long id) {
         this.id = id;
     }
 
     @Builder
-    public CertificatesEntity(String name, String description, String issuingAuthority, LocalDate certificationDate) {
+    public CertificatesEntity(String name, String institutionName, LocalDate startDate, LocalDate endDate) {
         this.name = name;
-        this.description = description;
-        this.issuingAuthority = issuingAuthority;
-        this.certificationDate = certificationDate;
+        this.institutionName = institutionName;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    public void changeName(String name) {
-        this.name = name;
-    }
-    public void changeDescription(String description) {
-        this.description = description;
-    }
 
 }

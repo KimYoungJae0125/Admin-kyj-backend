@@ -1,7 +1,7 @@
 package kr.kimyoungjae.admin.domain.skills.model.entity;
 
 import jakarta.persistence.*;
-import kr.kimyoungjae.admin.domain.projects.model.entity.ProjectsEntity;
+import kr.kimyoungjae.admin.domain.experiences.model.entity.ExperiencesEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,14 +21,14 @@ public class SkillsEntity {
     private Integer layoutOrder;
 
     @ManyToOne
-    @JoinColumn(name = "project_id")
-    private ProjectsEntity project;
+    @JoinColumn(name = "experience_id")
+    private ExperiencesEntity experience;
 
     @Builder
-    public SkillsEntity(String name, Integer layoutOrder, ProjectsEntity project) {
+    public SkillsEntity(String name, Integer layoutOrder, ExperiencesEntity experience) {
         this.name = name;
         this.layoutOrder = layoutOrder;
-        this.project = project;
+        this.experience = experience;
     }
 
     public void switchLayoutOrder(Integer layoutOrder) {

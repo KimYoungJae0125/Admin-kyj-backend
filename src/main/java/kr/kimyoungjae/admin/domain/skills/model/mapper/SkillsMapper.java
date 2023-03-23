@@ -1,7 +1,7 @@
 package kr.kimyoungjae.admin.domain.skills.model.mapper;
 
 import kr.kimyoungjae.admin.common.mapper.CommonMapper;
-import kr.kimyoungjae.admin.domain.projects.model.entity.ProjectsEntity;
+import kr.kimyoungjae.admin.domain.experiences.model.entity.ExperiencesEntity;
 import kr.kimyoungjae.admin.domain.skills.model.dto.request.SkillsRequestDTO;
 import kr.kimyoungjae.admin.domain.skills.model.dto.response.SkillsResponseDTO;
 import kr.kimyoungjae.admin.domain.skills.model.entity.SkillsEntity;
@@ -25,7 +25,7 @@ public class SkillsMapper implements CommonMapper<SkillsEntity, SkillsRequestDTO
         return SkillsEntity.builder()
                 .name(skillsRequestDTO.name())
                 .layoutOrder(skillsRequestDTO.layoutOrder())
-                .project(new ProjectsEntity(skillsRequestDTO.projectId()))
+                .experience(new ExperiencesEntity(skillsRequestDTO.experienceId()))
                 .build();
     }
 }
