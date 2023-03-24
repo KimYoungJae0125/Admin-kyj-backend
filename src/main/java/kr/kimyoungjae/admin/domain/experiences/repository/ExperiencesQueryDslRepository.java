@@ -33,6 +33,7 @@ public class ExperiencesQueryDslRepository implements QueryDSLRepository<Experie
                 .orderBy(
                         experiencesEntity.type.asc()
                         , experiencesEntity.endDate.desc()
+                        , experienceDescriptionsEntity.id.asc()
                 )
                 .where(
                         type == null ? null : experiencesEntity.type.eq(type)
